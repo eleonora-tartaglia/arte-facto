@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('article_id')->constrained()->onDelete('cascade');
             $table->timestamp('reserved_at')->useCurrent();
+            $table->timestamps(); // created_at, updated_at
         });
     }
 

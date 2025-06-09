@@ -32,9 +32,18 @@ class GalerieController extends Controller
 
     public function userIndex()
     {
-        $articles = Article::all();
+        $articles = \App\Models\Article::with('category')
+            // ->where('status', '!=', 'sold') // ❌ on exclut les vendus
+            ->latest()
+            ->get();
 
-        return view('articles.user.civilisations', compact('articles'));
+        $categories = \App\Models\Category::all();
+
+        return view('articles.user.civilisations', [
+            'articles' => $articles,
+            'categories' => $categories,
+            'showCategoryBar' => true,
+        ]);
     }
 
     public function userHome()

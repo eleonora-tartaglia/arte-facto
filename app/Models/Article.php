@@ -30,6 +30,12 @@ class Article extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function carts()
+{
+    return $this->hasMany(Cart::class);
+}
+
+
 
     /**
      * Relations possibles (si tu veux les ajouter plus tard) :

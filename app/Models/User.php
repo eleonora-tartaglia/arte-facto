@@ -49,6 +49,12 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    public function carts()
+{
+    return $this->hasMany(Cart::class);
+}
+
+
     /**
      * Get the user's initials
      */
