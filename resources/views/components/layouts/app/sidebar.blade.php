@@ -65,7 +65,7 @@
                             Les articles
                         </flux:navlist.item>
 
-                        <flux:navlist.item icon="shopping-cart" href="#" disabled>
+                        <flux:navlist.item icon="shopping-cart" :href="route('cart.index')" wire:navigate>
                             Mon panier
                         </flux:navlist.item>
 

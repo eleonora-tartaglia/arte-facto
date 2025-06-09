@@ -4,7 +4,7 @@
     {{-- ✅ BARRE DE CATÉGORIES SI DEMANDÉE --}}
     @isset($showCategoryBar)
         <nav class="bg-[#1A1A1A] py-4 px-6 flex flex-wrap justify-center gap-6 text-sm uppercase tracking-widest border-t border-[#7B5E1F]/30 shadow-inner">
-            @foreach ($nav_categories as $category)
+            @foreach ($categories as $category)
                 <a href="{{ route('user.civilisations', ['category' => $category->name]) }}"
                    class="hover:text-[#A9842C] transition">
                     {{ $category->name }}
@@ -26,7 +26,16 @@
                     <p class="text-sm text-gray-400 mb-2">{{ Str::limit($article->description, 100) }}</p>
                     <p><strong>Prix :</strong> {{ $article->price }} €</p>
                     <p><strong>Lieu :</strong> {{ $article->locality }}</p>
-                    <p><strong>Statut :</strong> {{ $article->status }}</p>
+                    <!-- <p><strong>Statut :</strong> {{ $article->status }}</p> -->
+                    <p><strong>Statut :</strong>
+                        @if($article->status === 'sold')
+                            <span class="text-red-400">Vendu</span>
+                        @elseif($article->status === 'in_cart')
+                            <span class="text-yellow-400">Dans un panier</span>
+                        @else
+                            <span class="text-green-400">Disponible</span>
+                        @endif
+                    </p>
                 </a>
             @endforeach
         </div>

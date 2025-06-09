@@ -10,14 +10,20 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        //
+        // Tu peux enregistrer ici d'autres services si besoin
     }
 
     public function boot(): void
     {
-        // Injecter les catégories dans toutes les vues
+        // 📦 Injecter toutes les catégories dans toutes les vues (optimisé)
         View::composer('*', function ($view) {
-            $view->with('nav_categories', Category::all());
+            static $categories = null;
+
+            if (is_null($categories)) {
+                $categories = Category::all();
+            }
+
+            $view->with('nav_categories', $categories);
         });
     }
 }

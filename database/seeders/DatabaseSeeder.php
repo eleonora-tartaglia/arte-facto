@@ -27,6 +27,20 @@ class DatabaseSeeder extends Seeder
             'role' => 'user',
         ]);
 
+        User::factory()->create([
+            'name' => 'Howard Carter',
+            'email' => 'carter@example.com',
+            'password' => Hash::make('ankh'),
+            'role' => 'user',
+        ]);
+        
+        User::factory()->create([
+            'name' => 'Evelyn Carnahan',
+            'email' => 'evelyn@example.com',
+            'password' => Hash::make('scroll'),
+            'role' => 'user',
+        ]);
+
         // 📂 Catégories avec descriptions
         $artAfricain = Category::create([
             'name' => 'Art Africain',

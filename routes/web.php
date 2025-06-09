@@ -4,9 +4,14 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Providers\RouteServiceProvider;
 use Livewire\Volt\Volt;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GalerieController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserDashboardController;
+
 use App\Models\Article;
 use App\Models\Category;
 
@@ -71,7 +76,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Dashboards selon le rôle utilisateur
     Route::view('/dashboard/admin', 'dashboard.admin')->name('dashboard.admin');
-    Route::view('/dashboard/user', 'dashboard.user')->name('dashboard.user');
+    // Route::view('/dashboard/user', 'dashboard.user')->name('dashboard.user');
+    Route::get('/dashboard/user', [UserDashboardController::class, 'index'])->name('dashboard.user');
+
 
     Route::get('/dashboard/user/accueil', [GalerieController::class, 'userHome'])->name('dashboard.user.home');
 
@@ -86,6 +93,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'showCategoryBar' => true,
         ]);
     })->middleware(['auth', 'verified'])->name('user.civilisations.menu');
+
+    // Panier
+    Route::get('/panier', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/panier', [CartController::class, 'store'])->name('cart.store');
+    Route::delete('/panier/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::patch('/panier/{id}', [CartController::class, 'update'])->name('cart.update');
+
+    // Validation de commande
+    Route::post('/commande/{cart}', [OrderController::class, 'confirm'])->name('order.confirm');
+    Route::get('/commande/merci', [OrderController::class, 'thankYou'])->name('order.thanks');
+
 
     // Paramètres utilisateur via Volt
     Route::redirect('settings', 'settings/profile');

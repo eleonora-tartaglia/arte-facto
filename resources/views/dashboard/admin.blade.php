@@ -8,7 +8,7 @@
 <x-layouts.app :title="'Tableau de bord Admin'">
     <div class="p-6 text-[#D8D3C3] bg-[#0c0c0c] min-h-screen font-sans">
 
-        <h1 class="text-4xl font-serif font-bold mb-10 text-[#D8D3C3]">Bienvenue dans le tableau de bord administrateur 🧙‍♂️</h1>
+        <h1 class="text-4xl font-serif font-bold mb-10 text-[#D8D3C3]">Bienvenue dans le tableau de bord administrateur 🦉</h1>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
             <!-- ARTICLES -->
