@@ -1,5 +1,18 @@
 <x-layouts.app :title="'Catalogue des œuvres'">
     <div class="p-8 text-[#D8D3C3] bg-[#0c0c0c] min-h-screen font-serif">
+
+    {{-- ✅ BARRE DE CATÉGORIES SI DEMANDÉE --}}
+    @isset($showCategoryBar)
+        <nav class="bg-[#1A1A1A] py-4 px-6 flex flex-wrap justify-center gap-6 text-sm uppercase tracking-widest border-t border-[#7B5E1F]/30 shadow-inner">
+            @foreach ($nav_categories as $category)
+                <a href="{{ route('user.civilisations', ['category' => $category->name]) }}"
+                   class="hover:text-[#A9842C] transition">
+                    {{ $category->name }}
+                </a>
+            @endforeach
+        </nav>
+    @endisset
+    
         <h1 class="text-3xl font-bold text-center my-6">Galerie des civilisations</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">

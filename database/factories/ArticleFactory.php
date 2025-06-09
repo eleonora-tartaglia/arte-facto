@@ -3,24 +3,16 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Category;
 
 class ArticleFactory extends Factory
 {
     public function definition(): array
     {
         return [
-            'title' => fake()->words(3, true),
+            'title' => fake()->sentence(3),
             'locality' => fake()->city(),
-            'category' => fake()->randomElement([
-                'Égypte Antique',
-                'Grèce Antique',
-                'Rome Antique',
-                'Artisanat Africain',
-                'Objets d’Océanie',
-                'Art Amérindiens',
-                'Art précolombiens',
-                'Civilisation Atlante',
-            ]),
+            'category_id' => Category::inRandomOrder()->first()?->id ?? 1, // 🧙‍♂️ Sécurité si pas encore seedé
             'description' => fake()->paragraph(4),
             'price' => fake()->randomFloat(2, 500, 15000),
             'image' => fake()->randomElement([

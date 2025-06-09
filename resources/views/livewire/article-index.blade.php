@@ -18,18 +18,14 @@
                 class="w-full px-4 py-2 pl-10 bg-[#1A1A1A] text-[#D8D3C3] placeholder-gray-400 border border-[#433611] rounded-xl shadow-inner shadow-black/40 focus:outline-none focus:ring-2 focus:ring-[#A9842C] focus:border-none transition duration-300">
 
 
-        <select wire:model="filterCategory"
-                class="p-2 rounded-xl bg-gray-800 text-white border border-[#7B5E1F]">
-            <option value="">Civilisations</option>
-            <option value="Égypte Antique">Égypte Antique</option>
-            <option value="Grèce Antique">Grèce Antique</option>
-            <option value="Rome Antique">Rome Antique</option>
-            <option value="Artisanat Africain">Artisanat Africain</option>
-            <option value="Objets d’Océanie">Objets d’Océanie</option>
-            <option value="Art Amérindiens">Art Amérindiens</option>
-            <option value="Art précolombiens">Art précolombiens</option>
-            <option value="Civilisation Atlante">Civilisation Atlante</option>
-        </select>
+                <select wire:model="filterCategory"
+                        class="p-2 rounded-xl bg-gray-800 text-white border border-[#7B5E1F]">
+                    <option value="">Toutes les civilisations</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+
         <button wire:click="triggerSearch" class="...">Rechercher</button>
 
         <button wire:click="$set('showFormModal', true)"
@@ -46,7 +42,10 @@
                 <img src="{{ $article->image }}" alt="{{ $article->title }}" class="h-40 w-full object-cover">
                 <div class="p-4 space-y-2">
                     <h3 class="text-lg font-bold">{{ $article->title }}</h3>
-                    <p class="text-sm text-gray-400">{{ $article->locality }} • {{ $article->category }}</p>
+                    <p class="text-sm text-gray-400">
+                        {{ $article->locality }} • {{ $article->category?->name ?? 'Non catégorisé' }}
+                    </p>
+
                     <p class="text-md font-semibold">{{ number_format($article->price, 2, ',', ' ') }} €</p>
 
                     <div class="flex gap-2 text-xs font-medium">
@@ -86,7 +85,7 @@
                 </h2>
 
                 <form wire:submit.prevent="save" class="space-y-4">
-                    @foreach (['title'=>'Titre', 'locality'=>'Localité', 'category'=>'Catégorie', 'price'=>'Prix (€)', 'image'=>'Image'] as $field => $placeholder)
+                @foreach (['title'=>'Titre', 'locality'=>'Localité', 'price'=>'Prix (€)', 'image'=>'Image'] as $field => $placeholder)
                         <div>
                             <input type="{{ $field === 'price' ? 'number' : 'text' }}"
                                 wire:model.defer="{{ $field }}"
@@ -95,13 +94,23 @@
                             @error($field) <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                         </div>
                     @endforeach
+                    <div>
+                        <select wire:model.defer="category_id"
+                                class="w-full p-2 rounded-xl bg-[#0c0c0c] border border-[#433611]/50 text-[#D8D3C3]">
+                            <option value="">-- Choisir une catégorie --</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('category_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
 
                     <div>
                         <textarea wire:model.defer="description" placeholder="Description"
                             class="w-full p-2 rounded-xl bg-[#0c0c0c] border border-[#433611]/50 focus:ring-2 focus:ring-[#A9842C]"></textarea>
                         @error('description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     </div>
-
+    
                     <div class="grid grid-cols-2 gap-4">
                         <select wire:model.defer="status"
                                 class="w-full p-2 bg-[#0c0c0c] border border-[#433611]/50 rounded-xl text-[#D8D3C3]">
