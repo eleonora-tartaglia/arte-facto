@@ -1,6 +1,22 @@
 <x-layouts.guest :title="'Civilisations'">
     <x-slot name="content">
-        <h1 class="text-3xl font-bold text-center my-6">Galerie</h1>
+
+    {{-- ✅ BARRE DE CATÉGORIES SI ACTIVÉE --}}
+        @isset($showCategoryBar)
+            <nav class="bg-[#1A1A1A] py-4 px-6 flex flex-wrap justify-center gap-6 text-sm uppercase tracking-widest border-t border-[#7B5E1F]/30 shadow-inner mb-6">
+                @foreach ($nav_categories as $category)
+                    <a href="{{ route('civilisations.index', ['category' => $category->name]) }}"
+                       class="hover:text-[#A9842C] transition">
+                        {{ $category->name }}
+                    </a>
+                @endforeach
+            </nav>
+        @endisset
+        
+        <!-- <h1 class="text-3xl font-bold text-center my-6">Galerie</h1> -->
+        <h1 class="text-3xl font-bold text-center my-6">
+            {{ $categoryName ?? 'Galerie' }}
+        </h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
             @foreach ($articles as $article)

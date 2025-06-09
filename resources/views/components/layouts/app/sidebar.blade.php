@@ -26,7 +26,7 @@
                             Mon profil
                         </flux:navlist.item>
 
-                        <flux:navlist.item icon="home" :href="route('home')" wire:navigate>
+                        <flux:navlist.item icon="home" :href="route('dashboard.user.home')" wire:navigate>
                             Accueil
                         </flux:navlist.item>
 
@@ -57,7 +57,7 @@
                             Mon profil
                         </flux:navlist.item>
 
-                        <flux:navlist.item icon="home" :href="route('home')" wire:navigate>
+                        <flux:navlist.item icon="home" :href="route('dashboard.user.home')" wire:navigate>
                             Accueil
                         </flux:navlist.item>
 

@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('locality');
-            $table->string('category');
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
             $table->text('description');
             $table->float('price');
             $table->string('image');

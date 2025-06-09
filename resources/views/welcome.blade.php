@@ -11,6 +11,8 @@
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 </head>
 <body class="bg-[#0c0c0c] text-[#D8D3C3] font-sans">
 
@@ -22,7 +24,15 @@
     @include('components.histoire')
     @include('components.footer')
 
+    <div x-data="{ open: false }" class="p-4">
+        <button @click="open = !open" class="bg-[#433611] text-white px-4 py-2 rounded">
+            Toggle test
+        </button>
 
+        <div x-show="open" class="mt-4 p-2 bg-[#1A1A1A] text-[#D8D3C3] rounded">
+            Alpine fonctionne ! ✨
+        </div>
+    </div>
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>AOS.init();</script>

@@ -12,4 +12,4 @@
             </div>
         </div>
         <div class="text-center text-xs text-gray-500 mt-8">&copy; 2025 Arte Facto. Tous droits réservés.</div>
-    </footer>
+</footer>

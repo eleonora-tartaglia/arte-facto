@@ -17,13 +17,19 @@ class Article extends Model
     protected $fillable = [
         'title',
         'locality',
-        'category',
         'description',
+        'category_id',
         'price',
         'image',
         'status',
         'type',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 
     /**
      * Relations possibles (si tu veux les ajouter plus tard) :

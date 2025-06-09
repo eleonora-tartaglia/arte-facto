@@ -15,7 +15,7 @@
                 <ul class="space-y-2 text-lg">
                     <li><strong>Prix :</strong> {{ $article->price }} €</li>
                     <li><strong>Lieu :</strong> {{ $article->locality }}</li>
-                    <li><strong>Catégorie :</strong> {{ $article->category }}</li>
+                    <li><strong>Catégorie :</strong> {{ $article->category->name }}</li>
                     <li><strong>Type :</strong> {{ $article->type }}</li>
                     <li><strong>Statut :</strong> {{ $article->status }}</li>
                 </ul>

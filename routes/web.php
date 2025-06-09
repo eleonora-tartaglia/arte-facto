@@ -7,6 +7,8 @@ use Livewire\Volt\Volt;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GalerieController;
+use App\Models\Article;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,14 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Galerie publique
 Route::get('/civilisations', [GalerieController::class, 'index'])->name('civilisations.index');
+
+// Galerie avec menu de catégories visible
+Route::get('/civilisations/menu', function () {
+    return view('articles.public.civilisations', [
+        'articles' => Article::with('category')->latest()->get(),
+        'showCategoryBar' => true,
+    ]);
+})->name('civilisations.menu');
 
 // Articles accessibles sans inscription
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
@@ -63,9 +73,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/dashboard/admin', 'dashboard.admin')->name('dashboard.admin');
     Route::view('/dashboard/user', 'dashboard.user')->name('dashboard.user');
 
+    Route::get('/dashboard/user/accueil', [GalerieController::class, 'userHome'])->name('dashboard.user.home');
+
     // Galerie accessible uniquement aux utilisateurs connectés
     Route::get('/galerie', [GalerieController::class, 'userIndex'])->name('user.civilisations');
     Route::get('/galerie/articles/{article}', [ArticleController::class, 'userShow'])->name('user.articles.show');
+
+    Route::get('/galerie/menu', function () {
+        return view('articles.user.civilisations', [
+            'articles' => \App\Models\Article::with('category')->latest()->get(),
+            'categories' => \App\Models\Category::all(),
+            'showCategoryBar' => true,
+        ]);
+    })->middleware(['auth', 'verified'])->name('user.civilisations.menu');
 
     // Paramètres utilisateur via Volt
     Route::redirect('settings', 'settings/profile');
