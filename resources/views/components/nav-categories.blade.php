@@ -4,7 +4,7 @@
     <!-- <a href="#" class="hover:underline">Civilisations</a> -->
     <a href="{{ route('civilisations.menu') }}" class="hover:underline">Civilisations</a>
     <a href="{{ route('civilisations.index') }}" class="hover:underline">Galerie</a>
-    <a href="#" class="hover:underline">À propos</a>
+    <a href="{{ route('about') }}" class="hover:underline">À propos</a>
     <a href="#" class="hover:underline">Contact</a>
 </nav>
 

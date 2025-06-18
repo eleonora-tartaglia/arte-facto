@@ -42,11 +42,11 @@
                             Cet artefact a déjà été acquis par un collectionneur.
                         </p>
                     @else
-                        @if ($article->status === 'in_cart' && $inOtherCarts > 1)
-                            <p class="text-yellow-400 text-sm italic mt-4 text-center">
-                                ⚠️ {{ $inOtherCarts }} utilisateurs ont ajouté cet article à leur panier.
-                            </p>
-                        @endif
+                    @if (isset($inOtherCarts) && $inOtherCarts > 0)
+                        <p class="text-yellow-400 text-sm italic mt-4 text-center">
+                            ⚠️ {{ $inOtherCarts }} utilisateurs ont ajouté cet article à leur panier.
+                        </p>
+                    @endif
 
                         <div class="flex justify-center mt-6">
                             <form action="{{ route('cart.store') }}" method="POST">

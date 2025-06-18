@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('article_id')->constrained()->onDelete('cascade');
             $table->float('price');
-            $table->timestamp('date')->useCurrent();
+            $table->timestamps();
         });
     }
 

@@ -105,7 +105,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Coupe de banquet antique ornée de scènes de Dionysos. Céramique à figures rouges, finesse hellénique incarnée, témoin vivant des festins antiques.',
                 'price' => 3200,
                 'image' => 'https://cdn.midjourney.com/4a7988d3-ea52-4842-ae10-1534691ea662/0_3.png',
-                'status' => 'in_cart',
+                'status' => 'available',
                 'type' => 'immediate',
                 'created_at' => now(),
                 'updated_at' => now(),

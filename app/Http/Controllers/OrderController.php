@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Article;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -24,11 +25,21 @@ class OrderController extends Controller
 
         // Marquer l'article comme vendu
         $article->status = 'sold';
-        $article->user_id = auth()->id();
         $article->save();
 
-        // Supprimer tous les autres paniers qui ont cet article
-        Cart::where('article_id', $article->id)->where('user_id', '!=', Auth::id())->delete();
+        // Enregistre la transaction dans la table dédiée
+        
+        Transaction::create([
+            'user_id'    => Auth::id(),
+            'article_id' => $article->id,
+            'price'      => $article->price,
+        ]);
+
+        // Supprime tous les autres paniers qui ont cet article
+
+        Cart::where('article_id', $article->id)
+            ->where('user_id', '!=', Auth::id())
+            ->delete();
 
         return redirect()->route('order.thanks')->with([
             'success' => 'Commande validée avec succès ✨',
