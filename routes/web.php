@@ -22,6 +22,8 @@ use App\Models\Category;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::view('/a-propos', 'pages.a-propos')->name('about');
+
 
 // Galerie publique
 Route::get('/civilisations', [GalerieController::class, 'index'])->name('civilisations.index');

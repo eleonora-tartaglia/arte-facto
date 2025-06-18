@@ -24,13 +24,13 @@ new class extends Component {
 
 <section class="mt-10 space-y-6">
     <div class="relative mb-5">
-        <flux:heading>{{ __('Delete account') }}</flux:heading>
-        <flux:subheading>{{ __('Delete your account and all of its resources') }}</flux:subheading>
+        <flux:heading>{{ __('Supprimer son compte') }}</flux:heading>
+        <flux:subheading>{{ __('Supprimer son compte et tout ce qui avec') }}</flux:subheading>
     </div>
 
     <flux:modal.trigger name="confirm-user-deletion">
         <flux:button variant="danger" x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
-            {{ __('Delete account') }}
+            {{ __('Supprimer son compte') }}
         </flux:button>
     </flux:modal.trigger>
 
@@ -51,7 +51,7 @@ new class extends Component {
                     <flux:button variant="filled">{{ __('Cancel') }}</flux:button>
                 </flux:modal.close>
 
-                <flux:button variant="danger" type="submit">{{ __('Delete account') }}</flux:button>
+                <flux:button variant="danger" type="submit">{{ __('Supprimer ce compte') }}</flux:button>
             </div>
         </form>
     </flux:modal>

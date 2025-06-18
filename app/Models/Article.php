@@ -31,9 +31,15 @@ class Article extends Model
     }
 
     public function carts()
-{
-    return $this->hasMany(Cart::class);
-}
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
+    }
+
 
 
 

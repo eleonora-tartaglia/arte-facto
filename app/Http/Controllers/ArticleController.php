@@ -17,9 +17,7 @@ class ArticleController extends Controller
     {
         $article = \App\Models\Article::with('category')->findOrFail($id);
     
-        $inOtherCarts = Cart::where('article_id', $article->id)
-            ->where('user_id', '!=', auth()->id())
-            ->count();
+        $inOtherCarts = $article->carts()->where('user_id', '!=', auth()->id())->count();
 
         return view('articles.user.show', compact('article', 'inOtherCarts'));
     }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\Article;
+use App\Models\Transaction;
 
 class UserDashboardController extends Controller
 {
@@ -11,11 +11,11 @@ class UserDashboardController extends Controller
     {
         $user = Auth::user();
 
-        $boughtArticles = Article::where('user_id', $user->id)
-                                 ->where('status', 'sold')
-                                 ->with('category')
-                                 ->latest()
-                                 ->get();
+        $boughtArticles = Transaction::with('article.category')
+            ->where('user_id', $user->id)
+            ->latest()
+            ->get()
+            ->pluck('article');
 
         return view('dashboard.user', compact('boughtArticles', 'user'));
     }

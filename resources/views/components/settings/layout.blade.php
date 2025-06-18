@@ -4,9 +4,9 @@
         {{-- 🧭 Barre de navigation à gauche --}}
         <div class="me-10 w-full pb-4 md:w-[220px]">
             <flux:navlist>
-                <flux:navlist.item :href="route('settings.profile')" wire:navigate>{{ __('Profile') }}</flux:navlist.item>
-                <flux:navlist.item :href="route('settings.password')" wire:navigate>{{ __('Password') }}</flux:navlist.item>
-                <flux:navlist.item :href="route('settings.appearance')" wire:navigate>{{ __('Appearance') }}</flux:navlist.item>
+                <flux:navlist.item :href="route('settings.profile')" wire:navigate>{{ __('Profil') }}</flux:navlist.item>
+                <flux:navlist.item :href="route('settings.password')" wire:navigate>{{ __('Mot de passe') }}</flux:navlist.item>
+                <flux:navlist.item :href="route('settings.appearance')" wire:navigate>{{ __('Ambiance') }}</flux:navlist.item>
             </flux:navlist>
         </div>
 
